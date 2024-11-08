@@ -73,8 +73,9 @@ jobs:
             
             sudo apt-get install wget bison gcc make curl ninja-build -y
             echo "y" | sdkmanager --install "ndk;$ndkversion" --sdk_root=${ANDROID_SDK_ROOT} &> /dev/null
-            wget https://github.com/qwq233/ollvm-bin/releases/download/18.0.0/clang-18 -O ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/oclang
-            chmod +x ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/oclang
+            wget https://github.com/qwq233/ollvm-bin/releases/download/18.0.0/clang-18 -O ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-18
+            chmod +x ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-18
+            touch ${ANDROID_SDK_ROOT}/ndk/$ndkversion/enable_ollvm
             echo "sdk.dir=${ANDROID_HOME}" >> local.properties
       - name: Debug Build
         run: |
@@ -145,7 +146,7 @@ jobs:
       - name: Prepare Environment
         run: |
             echo "Removing large packages"
-            sudo apt-get remove -y '^dotnet-.*' aspnetcore-targeting-pack-6.0 aspnetcore-targeting-pack-7.0
+            sudo apt-get remove -y '^dotnet-.*'
             sudo apt-get remove -y '^llvm-.*'
             sudo apt-get remove -y 'php.*'
             sudo apt-get remove -y '^mongodb-.*'
@@ -166,8 +167,9 @@ jobs:
             
             sudo apt-get install bison gcc make wget curl ninja-build -y
             echo "y" | sdkmanager --install "ndk;$ndkversion" --sdk_root=${ANDROID_SDK_ROOT} &> /dev/null
-            wget https://github.com/qwq233/ollvm-bin/releases/download/18.0.0/clang-18 -O ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/oclang
-            chmod +x ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/oclang
+            wget https://github.com/qwq233/ollvm-bin/releases/download/18.0.0/clang-18 -O ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-18
+            chmod +x ${ANDROID_SDK_ROOT}/ndk/$ndkversion/toolchains/llvm/prebuilt/linux-x86_64/bin/clang-18
+            touch ${ANDROID_SDK_ROOT}/ndk/$ndkversion/enable_ollvm
             echo "sdk.dir=${ANDROID_HOME}" >> local.properties
 
       - name: Debug Build
